@@ -19,13 +19,14 @@ public class WordGuesser {
         this.userInput = userInput;
         this.playerGuesses= new HashSet<>();
     }
-    private void printLetterOrBlank()
+    private boolean printLetterOrBlank()
     {
         for(int i = 0; i < secretWord.length(); i++)
         {
             if(playerGuesses.contains(secretWord.charAt(i)))
             {
                 System.out.print(secretWord.charAt(i));
+                correctCount++;
             }
             else
             {
@@ -33,6 +34,8 @@ public class WordGuesser {
             }
         }
         System.out.println();
+
+        return ();
     }
 
     public void checkWord()
