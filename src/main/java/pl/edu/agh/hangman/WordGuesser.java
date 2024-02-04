@@ -6,17 +6,24 @@ import java.util.Set;
 
 public class WordGuesser {
 
-    private int correctCount = 0;
+    private LifePointsCounter lifeScore;
     private String secretWord;
     private Set<Character> playerGuesses;
 
     WordGuesser()
     {
         this.secretWord = SelectWord.wordSelector();
+
         this.playerGuesses= new HashSet<>();
+        this.lifeScore = new LifePointsCounter();
+        System.out.println(lifeScore.lifeScore);
+        System.out.println(secretWord);
+
     }
-    public void printLetterOrBlank(String userInput)
+    public boolean printLetterOrBlank(String userInput)
     {
+        int correctCount = 0;
+        boolean isCorrectChar = true;
         if (userInput.length() > secretWord.length())
         {
             System.out.println("Don't cheat, homie!");
@@ -29,16 +36,25 @@ public class WordGuesser {
             }
 
             for (int i = 0; i < secretWord.length(); i++) {
+
                 if (playerGuesses.contains(secretWord.charAt(i))) {
                     System.out.print(secretWord.charAt(i));
-//                    correctCount++;
-                } else {
+                    correctCount++;
+                }
+                else
+                {
+                    isCorrectChar = false;
                     System.out.print("_");
                 }
             }
-            System.out.println();
+         if(!isCorrectChar)
+            {
+                lifeScore.changeLifeScore(false);
+                isCorrectChar = true;
+            }
+            System.out.println(lifeScore.lifeScore);
         }
-//
-//        return (secretWord.length() == correctCount);
+
+        return (secretWord.length() == correctCount);
     }
 }

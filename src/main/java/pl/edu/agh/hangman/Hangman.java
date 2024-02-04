@@ -60,12 +60,22 @@ public class Hangman {
 
         Scanner scanner = new Scanner(System.in);
         String input;
+        LifePointsCounter lifePointsCounter = new LifePointsCounter();
+
+
+        int lifeScore = lifePointsCounter.lifeScore;
 
         WordGuesser wordGuesser = new WordGuesser();
 
         while (true) {
+
             input = scanner.nextLine();
-            wordGuesser.printLetterOrBlank(input);
+            if(wordGuesser.printLetterOrBlank(input))
+                break;
+
+            if(lifeScore == 0) System.out.println("Koniec");
         }
+
+
     }
 }
