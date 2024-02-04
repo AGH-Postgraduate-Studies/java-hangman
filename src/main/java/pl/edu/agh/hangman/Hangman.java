@@ -58,15 +58,14 @@ public class Hangman {
 
     public static void main(String[] args) {
 
-        String secret = "Hello it's me!";
         Scanner scanner = new Scanner(System.in);
         String input;
 
-        while(true)
-        {
+        WordGuesser wordGuesser = new WordGuesser();
+
+        while (true) {
             input = scanner.nextLine();
-            WordGuesser wordGuesser = new WordGuesser(secret, input);
-            wordGuesser.checkWord();
+            wordGuesser.printLetterOrBlank(input);
         }
     }
 }
